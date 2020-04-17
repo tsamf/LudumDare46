@@ -58,3 +58,10 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
+[merge]
+tool = unityyamlmerge
+
+[mergetool "unityyamlmerge"]
+trustExitCode = false
+cmd = 'C:\Program Files\Unity\2020.1.0b5\Editor\Data\Tools\UnityYAMLMerge.exe' merge -p "$BASE" "$REMOTE" "$LOCAL" "$MERGED"
+
