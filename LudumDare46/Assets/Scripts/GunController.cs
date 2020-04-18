@@ -14,6 +14,7 @@ public class GunController : MonoBehaviour
         {      
             GameObject bullet = Instantiate(shootProfile.bulletPrefab, nozzle.position, Quaternion.identity);
             bullet.GetComponent<Rigidbody>().AddForce(nozzle.forward * shootProfile.bulletSpeed, ForceMode.Impulse);
+            bullet.GetComponent<BulletController>().aliveTime = shootProfile.bulletAliveTime;
             yield return new WaitForSeconds(shootProfile.fireRate);
         }
 
