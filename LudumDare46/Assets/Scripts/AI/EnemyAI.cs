@@ -5,11 +5,16 @@ using UnityEngine;
 public class EnemyAI : MonoBehaviour
 {
     public float lookRadius = 4f;
+    public float rotationVal = 180f;
+
     [Header("Set dynamically")]
     public Rigidbody rgbdy = null;
     public EnemyGunController egc = null;
     public HeroAI hero = null;
     private HealthScript hscript = null;
+
+    int currentDir = 1;
+    int lastDir = 1;
 
     private void Awake()
     {
@@ -41,9 +46,27 @@ public class EnemyAI : MonoBehaviour
             return;
 
         float distance = Vector3.Distance(transform.position, hero.transform.position);
-
         if (distance < lookRadius)
         {
+            float dir = hero.transform.position.x - transform.position.x;
+            float sign = Mathf.Sign(dir);
+
+            if (sign > 0)
+            {
+                currentDir = 1;
+            }
+            else
+                currentDir = -1;
+            if (lastDir != currentDir)
+            {
+                lastDir = currentDir;
+                transform.Rotate(Vector3.up, rotationVal);
+                // flip gun so we can always see it won;t hide behind the player     
+                Vector3 posx = egc.transform.localPosition;
+                posx.x = -posx.x;
+                egc.transform.localPosition = posx;
+            }
+
             egc.target = hero.transform.position;
 
             // Shoot based on the shoot profile

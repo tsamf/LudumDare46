@@ -11,6 +11,7 @@ public class Character : MonoBehaviour
     public float jumpspeed = 12f;
     public float raydistance = 5f;
     public float jumpDuration = 3f;
+    public float rotationVal = 180f;
 
     public bool isGrounded = false;
     public bool jump = false;
@@ -21,13 +22,15 @@ public class Character : MonoBehaviour
 
     float jumpTimer = 0f;
     int currentDir = 1;
-    int lastDir;
+    int lastDir = 1;
+    int movementHash = -1;
 
     void Awake()
     {
         gc = GetComponentInChildren<GunController>();
         rb = GetComponent<Rigidbody>();
-        anim = GetComponent<Animator>();
+        //anim = GetComponent<Animator>();
+        //movementHash = Animator.StringToHash("movement");
     }
 
     void Update()
@@ -43,19 +46,29 @@ public class Character : MonoBehaviour
         movement = Vector3.zero;
         movement = Vector3.right * h;
         movement = movement.normalized;
+        //anim.SetFloat(movementHash, h);
 
-        //if (h > 0)
-        //    currentDir = -1;
-        //else if (h < 0)
-        //    currentDir = 1;
+        Vector3 gunLookPos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, transform.position.z - Camera.main.transform.position.z);
+        gunLookPos = Camera.main.ScreenToWorldPoint(gunLookPos);
+        float dir = gunLookPos.x - transform.position.x;
+        float sign = Mathf.Sign(dir);
+        if (sign > 0)
+        {
+            currentDir = 1;
+        }
+        else
+            currentDir = -1;
+        if (lastDir != currentDir)
+        {
+            lastDir = currentDir;
+            transform.Rotate(Vector3.up, rotationVal);
+            // flip gun so we can always see it won;t hide behind the player
+            Vector3 posx = gc.transform.localPosition;
+            posx.x = -posx.x;
+            gc.transform.localPosition = posx;
+        }
 
-        //if (lastDir != currentDir)
-        //{
-        //    lastDir = currentDir;
-        //    transform.Rotate(Vector3.up, 180f);
-        //}
-
-        if(Input.GetKeyDown(KeyCode.Space) && isGrounded)
+        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
             jump = true;
             jumpTimer = jumpDuration;
