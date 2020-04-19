@@ -14,13 +14,6 @@ public class HealthScript : MonoBehaviour
     
     public void UpdateHealth(int amount)
     {
-      currentHealth = Mathf.Clamp(currentHealth + amount, 0 , maxHealth);
-        if (currentHealth <= 0)
-            Die();
-    }
-
-    private void Die()
-    {
-        Destroy(gameObject);
+      currentHealth = Mathf.Clamp(currentHealth + amount, 0 , maxHealth);     
     }
 }

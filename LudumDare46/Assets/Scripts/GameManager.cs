@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using TMPro;
 
 public enum GameState
 {
@@ -15,6 +17,8 @@ public class GameManager : MonoBehaviour
 {
     [Header("set in inspector")]
     public SettingsMenu smenu = null;
+    public GameObject gameoverMenu = null;
+    public TextMeshProUGUI scoreTxt = null;
 
     public ScoreManager scoreManager = null;
     public AudioManager audioManager = null;
@@ -45,10 +49,18 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 0f;
     }
 
+    public void Restart()
+    {
+        gameoverMenu.SetActive(false);
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(1);
+    }
+
     public void ResumeGame()
     {
         Debug.Log("resume");
         smenu.gameObject.SetActive(false);
+        gameoverMenu.SetActive(false);
         currentState = GameState.Playing;
         audioManager.audiosource.UnPause();
         Time.timeScale = 1f;
@@ -58,6 +70,13 @@ public class GameManager : MonoBehaviour
     {
         smenu.MainMenu();
         ResumeGame();
+    }
+
+    public void GameOver()
+    {
+        Time.timeScale = 0f;
+        scoreTxt.text = scoreManager.currentScore.ToString();
+        gameoverMenu.SetActive(true);
     }
 
     public void ActiveSceneChange(Scene current, Scene next)

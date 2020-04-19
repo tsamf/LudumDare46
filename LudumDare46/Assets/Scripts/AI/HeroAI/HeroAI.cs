@@ -25,11 +25,17 @@ public class HeroAI : MonoBehaviour
         {
             if(hscript.currentHealth > 0)
              hscript.UpdateHealth(-1);
-            if (hscript.currentHealth < 0)
+            if (hscript.currentHealth <= 0)
             {
                 // game over
+                Die();
+                GameManager.instance.GameOver();
             }
         }
+    }
+    private void Die()
+    {
+        Destroy(gameObject);
     }
 
     // Update is called once per frame

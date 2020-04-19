@@ -20,5 +20,4 @@ public class SettingsMenu : MonoBehaviour
     {
         SceneManager.LoadScene(0);
     }
-
 }

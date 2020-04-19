@@ -116,11 +116,18 @@ public class Character : MonoBehaviour
         {
             if (hscript.currentHealth > 0)
                 hscript.UpdateHealth(-1);
-            if (hscript.currentHealth < 0)
+            if (hscript.currentHealth <= 0)
             {
                 // game over
+                GameManager.instance.GameOver();
+                Die();
             }
         }
+    }
+
+    private void Die()
+    {
+        Destroy(gameObject);
     }
 
     Vector3 FloorRayCast(float offsetX, float offsetZ, float raycastLength)

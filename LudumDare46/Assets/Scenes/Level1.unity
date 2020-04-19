@@ -366,10 +366,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2217813193256615393, guid: 14df182a327437a468a6eb748c5104c9, type: 3}
-      propertyPath: maxHealth
-      value: 5000
-      objectReference: {fileID: 0}
     - target: {fileID: 2217813193256615397, guid: 14df182a327437a468a6eb748c5104c9, type: 3}
       propertyPath: m_LocalPosition.x
       value: -8.66
@@ -414,18 +410,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2217813193256615398, guid: 14df182a327437a468a6eb748c5104c9, type: 3}
-      propertyPath: moveSpeed
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 2217813193256615402, guid: 14df182a327437a468a6eb748c5104c9, type: 3}
       propertyPath: m_Name
       value: Hero
       objectReference: {fileID: 0}
-    - target: {fileID: 2217813193256615403, guid: 14df182a327437a468a6eb748c5104c9, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 0ffc6c3af1267ae48af3bd9dbe792216, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 14df182a327437a468a6eb748c5104c9, type: 3}
 --- !u!108 &1084191241
@@ -558,10 +546,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6246715113315915339, guid: 996cba239301273459ee26fe4ff341af, type: 3}
-      propertyPath: maxHealth
-      value: 5000
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 996cba239301273459ee26fe4ff341af, type: 3}
 --- !u!1 &1386430539
@@ -597,6 +581,7 @@ MonoBehaviour:
   - {fileID: 2286228852482428347, guid: 7bb605c4f4838b747a88ccff2b2310c3, type: 3}
   - {fileID: 4696510090100403706, guid: 042e24894cbde5945b89ce10108c9067, type: 3}
   - {fileID: 6438363143790546305, guid: db698b5905897394cbd31cc9a04bb16b, type: 3}
+  enemies: []
   Xoffset: -3
   yOffset: 2.5
   zOffset: 1

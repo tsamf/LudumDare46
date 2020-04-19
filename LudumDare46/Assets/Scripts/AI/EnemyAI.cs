@@ -38,6 +38,11 @@ public class EnemyAI : MonoBehaviour
         {
             if (hscript.currentHealth > 0)
                 hscript.UpdateHealth(-1);
+            if (hscript.currentHealth <= 0)
+            {
+                ScoreManager.instance.UpdateScore(1);
+                Die();
+            }
         }
     }
 
@@ -90,6 +95,11 @@ public class EnemyAI : MonoBehaviour
             egc.isFiring = true;
             StartCoroutine(egc.Shoot());
         }
+    }
+
+    private void Die()
+    {
+        Destroy(gameObject);
     }
 
     private void OnDrawGizmos()
