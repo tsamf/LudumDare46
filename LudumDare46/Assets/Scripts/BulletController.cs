@@ -5,6 +5,7 @@ using UnityEngine;
 public class BulletController : MonoBehaviour
 {
     public float aliveTime = 0f;
+    public ParticleSystem bulletDestroyEffect = null;
 
     private void Start()
     {
