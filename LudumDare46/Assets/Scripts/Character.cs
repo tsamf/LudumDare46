@@ -3,9 +3,7 @@
 public class Character : MonoBehaviour
 {
     private Animator anim;
-    public Rigidbody rb;
-    public GunController gc = null;
-
+   
     public LayerMask layermask;
     public float movespeed = 12f;
     public float jumpspeed = 12f;
@@ -13,12 +11,18 @@ public class Character : MonoBehaviour
     public float jumpDuration = 3f;
     public float rotationVal = 180f;
 
+    [Header("set dynamically")]
     public bool isGrounded = false;
     public bool jump = false;
 
     private Vector3 gravity = Vector3.zero; 
     private Vector3 movement = Vector3.zero;
     private Vector3 floorpos = Vector3.zero;
+
+    public Rigidbody rb;
+    public GunController gc = null;
+    private HealthScript hscript = null;
+    public static Character instance = null;
 
     float jumpTimer = 0f;
     int currentDir = 1;
@@ -29,6 +33,8 @@ public class Character : MonoBehaviour
     {
         gc = GetComponentInChildren<GunController>();
         rb = GetComponent<Rigidbody>();
+        hscript = GetComponent<HealthScript>();
+        instance = this;
         //anim = GetComponent<Animator>();
         //movementHash = Animator.StringToHash("movement");
     }
@@ -102,6 +108,19 @@ public class Character : MonoBehaviour
         }
 
         rb.velocity = movement * movespeed + gravity;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.GetComponent<BulletController>())
+        {
+            if (hscript.currentHealth > 0)
+                hscript.UpdateHealth(-1);
+            if (hscript.currentHealth < 0)
+            {
+                // game over
+            }
+        }
     }
 
     Vector3 FloorRayCast(float offsetX, float offsetZ, float raycastLength)

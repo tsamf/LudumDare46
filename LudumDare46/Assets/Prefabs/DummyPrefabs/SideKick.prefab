@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 2916864360776099210}
   - component: {fileID: 2916864360776099221}
   - component: {fileID: 2916864360776099222}
+  - component: {fileID: 6246715113315915339}
   m_Layer: 10
   m_Name: SideKick
   m_TagString: Untagged
@@ -63,7 +64,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 2ee601bc22dd35e489a753dd63219316, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -127,8 +128,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f156eacf0a61d24a9d5c2ad337ab4d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 0}
-  gc: {fileID: 0}
   layermask:
     serializedVersion: 2
     m_Bits: 256
@@ -136,8 +135,25 @@ MonoBehaviour:
   jumpspeed: 150
   raydistance: 1.6
   jumpDuration: 1
+  rotationVal: 180
   isGrounded: 0
   jump: 0
+  rb: {fileID: 0}
+  gc: {fileID: 0}
+--- !u!114 &6246715113315915339
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2916864360776099211}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09ec1250f3031f24c9aa7fdf5b5e9f73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 3
+  currentHealth: 0
 --- !u!1001 &2916864361691283110
 PrefabInstance:
   m_ObjectHideFlags: 0

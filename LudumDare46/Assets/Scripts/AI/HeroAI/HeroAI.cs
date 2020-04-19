@@ -33,7 +33,7 @@ public class HeroAI : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (hscript.currentHealth <= 0)
             return;

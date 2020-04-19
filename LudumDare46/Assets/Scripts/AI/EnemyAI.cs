@@ -11,6 +11,7 @@ public class EnemyAI : MonoBehaviour
     public Rigidbody rgbdy = null;
     public EnemyGunController egc = null;
     public HeroAI hero = null;
+    public Character sideKick = null;
     private HealthScript hscript = null;
 
     int currentDir = 1;
@@ -28,6 +29,7 @@ public class EnemyAI : MonoBehaviour
     void Start()
     {
         hero = HeroAI.instance;
+        sideKick = Character.instance;
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -42,39 +44,51 @@ public class EnemyAI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (hscript.currentHealth <= 0 || hero == null)
+        if (hscript.currentHealth <= 0 || hero == null || sideKick == null)
             return;
 
-        float distance = Vector3.Distance(transform.position, hero.transform.position);
-        if (distance < lookRadius)
+        float distanceToHero = Vector3.Distance(transform.position, hero.transform.position);
+        float distanceToSideKick = Vector3.Distance(transform.position, sideKick.transform.position);
+
+        if (distanceToSideKick < lookRadius)
         {
-            float dir = hero.transform.position.x - transform.position.x;
-            float sign = Mathf.Sign(dir);
+            AimAt(sideKick.transform);
+        }
 
-            if (sign > 0)
-            {
-                currentDir = 1;
-            }
-            else
-                currentDir = -1;
-            if (lastDir != currentDir)
-            {
-                lastDir = currentDir;
-                transform.Rotate(Vector3.up, rotationVal);
-                // flip gun so we can always see it won;t hide behind the player     
-                Vector3 posx = egc.transform.localPosition;
-                posx.x = -posx.x;
-                egc.transform.localPosition = posx;
-            }
+        if (distanceToHero < lookRadius)
+        {
+            AimAt(hero.transform);
+        }
+    }
 
-            egc.target = hero.transform.position;
+    private void AimAt(Transform t)
+    {
+        float dir = t.transform.position.x - transform.position.x;
+        float sign = Mathf.Sign(dir);
 
-            // Shoot based on the shoot profile
-            if (!egc.isFiring)
-            {
-                egc.isFiring = true;
-                StartCoroutine(egc.Shoot());
-            }
+        egc.target = t.transform.position;
+
+        if (sign > 0)
+        {
+            currentDir = 1;
+        }
+        else
+            currentDir = -1;
+        if (lastDir != currentDir)
+        {
+            lastDir = currentDir;
+            transform.Rotate(Vector3.up, rotationVal);
+            // flip gun so we can always see it won;t hide behind the player     
+            Vector3 posx = egc.transform.localPosition;
+            posx.x = -posx.x;
+            egc.transform.localPosition = posx;
+        }
+
+        // Shoot based on the shoot profile
+        if (!egc.isFiring)
+        {
+            egc.isFiring = true;
+            StartCoroutine(egc.Shoot());
         }
     }
 

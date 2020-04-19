@@ -6,20 +6,22 @@ using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour
 {
     // Start is called before the first frame update
+    private void Start()
+    {
+        GameManager.instance.currentState = GameState.Menu;
+    }
 
     public void PlayGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
-    public void SettingsMenu()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 2);
-    }
-
     public void QuitGame()
     {
-        Application.Quit();
-        Debug.Log("Game is exiting");
+        #if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+        #else
+             Application.Quit();
+        #endif
     }
 }

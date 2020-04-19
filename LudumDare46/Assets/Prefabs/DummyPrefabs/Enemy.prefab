@@ -129,9 +129,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lookRadius: 10
+  rotationVal: 180
   rgbdy: {fileID: 0}
   egc: {fileID: 0}
   hero: {fileID: 0}
+  sideKick: {fileID: 0}
 --- !u!114 &581546328137672228
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -144,7 +146,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09ec1250f3031f24c9aa7fdf5b5e9f73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 3
+  maxHealth: 2
   currentHealth: 0
 --- !u!1001 &6823206339602753764
 PrefabInstance:
