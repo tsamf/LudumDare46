@@ -2,16 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GunController : MonoBehaviour
+public class EnemyGunController : MonoBehaviour
 {
     public ShootProfile shootProfile = null;
     public Transform nozzle = null;
     public bool isFiring = false;
+    public Vector3 target = Vector3.zero;
 
     public IEnumerator Shoot()
     {
         for (int indx = 0; indx < shootProfile.noOfBullets; indx++)
-        {      
+        {
             GameObject bullet = Instantiate(shootProfile.bulletPrefab, nozzle.position, Quaternion.identity);
             bullet.GetComponent<Rigidbody>().AddForce(nozzle.forward * shootProfile.bulletSpeed, ForceMode.Impulse);
             bullet.GetComponent<BulletController>().aliveTime = shootProfile.bulletAliveTime;
@@ -24,8 +25,9 @@ public class GunController : MonoBehaviour
 
     private void Update()
     {
-        Vector3 gunLookPos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, transform.position.z - Camera.main.transform.position.z);
-        gunLookPos = Camera.main.ScreenToWorldPoint(gunLookPos);
-        transform.LookAt(gunLookPos, Vector3.forward);
+        if (target== Vector3.zero)
+            return;
+
+        transform.LookAt(target);
     }
 }

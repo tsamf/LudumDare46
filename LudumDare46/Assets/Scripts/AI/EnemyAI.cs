@@ -7,13 +7,16 @@ public class EnemyAI : MonoBehaviour
     public float lookRadius = 4f;
     [Header("Set dynamically")]
     public Rigidbody rgbdy = null;
-    public GunController guncontroller = null;
+    public EnemyGunController egc = null;
     public HeroAI hero = null;
+    private HealthScript hscript = null;
 
     private void Awake()
     {
         rgbdy = GetComponent<Rigidbody>();
-        guncontroller = GetComponentInChildren<GunController>();
+        hscript = GetComponent<HealthScript>();
+
+        egc = GetComponentInChildren<EnemyGunController>();
     }
 
     // Start is called before the first frame update
@@ -22,19 +25,32 @@ public class EnemyAI : MonoBehaviour
         hero = HeroAI.instance;
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.GetComponent<BulletController>())
+        {
+            if (hscript.currentHealth > 0)
+                hscript.UpdateHealth(-1);
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {
+        if (hscript.currentHealth <= 0 || hero == null)
+            return;
+
         float distance = Vector3.Distance(transform.position, hero.transform.position);
-        transform.LookAt(hero.transform.position);
 
         if (distance < lookRadius)
         {
+            egc.target = hero.transform.position;
+
             // Shoot based on the shoot profile
-            if (!guncontroller.isFiring)
+            if (!egc.isFiring)
             {
-                guncontroller.isFiring = true;
-                StartCoroutine(guncontroller.Shoot());
+                egc.isFiring = true;
+                StartCoroutine(egc.Shoot());
             }
         }
     }
