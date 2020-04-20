@@ -13,7 +13,7 @@ public class IKControl : MonoBehaviour
     public Transform rightHandObj = null;
     public Transform leftHandObj = null;
     public Transform lookObj = null;
-    public Transform lookObj2 = null;
+    public float lookweight = 0f;
 
     void Start()
     {
@@ -33,9 +33,8 @@ public class IKControl : MonoBehaviour
                 // Set the look target position, if one has been assigned
                 if (lookObj != null)
                 {
-                    animator.SetLookAtWeight(1);
+                    animator.SetLookAtWeight(lookweight);
                     animator.SetLookAtPosition(lookObj.position);
-                    animator.SetLookAtPosition(lookObj2.position);
                 }
 
                 // Set the right hand target position and rotation, if one has been assigned
