@@ -25,6 +25,7 @@ public class ScoreManager : MonoBehaviour
     public void ResetScore()
     {
         currentScore = inititalScore;
+        onScoreChange(currentScore);
     }
 
     public void UpdateScore(int val)

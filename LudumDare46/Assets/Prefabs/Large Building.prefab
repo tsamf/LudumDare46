@@ -124,13 +124,13 @@ MonoBehaviour:
   - {fileID: 9208852553629676096}
   - {fileID: 9208852553072797965}
   - {fileID: 9208852552785699904}
-  - {fileID: 4230813360273574401}
-  - {fileID: 4230813360273574401}
-  - {fileID: 4230813360273574401}
+  - {fileID: 9208852553666813879}
+  - {fileID: 9208852554086192416}
+  - {fileID: 9208852553448863811}
   - {fileID: 9208852552204539090}
-  - {fileID: 4230813360273574401}
+  - {fileID: 9208852553560594599}
   minNoOfEnemiesToSpawn: 1
-  maxNoOfEnemeiesToSpawn: 3
+  maxNoOfEnemeiesToSpawn: 5
   enemyPrefab: {fileID: 9219448552962823210, guid: 7ed83cbed5d01cf459664889ce3a9040, type: 3}
   enemyContainer: {fileID: 0}
 --- !u!1 &9208852552204539117
