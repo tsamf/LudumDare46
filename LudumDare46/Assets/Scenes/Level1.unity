@@ -265,7 +265,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementSpeed: 2
   followTransform: {fileID: 0}
-  offset: {x: 0, y: 5, z: -11}
+  offset: {x: 7, y: 5, z: -11}
 --- !u!1001 &143703764
 PrefabInstance:
   m_ObjectHideFlags: 0

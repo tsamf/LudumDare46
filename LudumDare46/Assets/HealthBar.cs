@@ -14,7 +14,6 @@ public class HealthBar : MonoBehaviour
 
     public void SetHealthBarValue(float value)
     {
-        Debug.Log(value);
         HealthBarImage.fillAmount = value;
         if (HealthBarImage.fillAmount < 0.3f)
         {

@@ -18,7 +18,9 @@ public class GameManager : MonoBehaviour
     [Header("set in inspector")]
     public SettingsMenu smenu = null;
     public GameObject gameoverMenu = null;
+    public GameObject HUD = null;
     public TextMeshProUGUI scoreTxt = null;
+    public TextMeshProUGUI gameoverScoreTxt = null;
 
     public ScoreManager scoreManager = null;
     public AudioManager audioManager = null;
@@ -39,10 +41,17 @@ public class GameManager : MonoBehaviour
     {
         scoreManager = ScoreManager.instance;
         audioManager = AudioManager.instance;
+        scoreManager.onScoreChange += UpdateScoreUI;
+    }
+
+    public void UpdateScoreUI(int score)
+    {
+        scoreTxt.text = score.ToString();
     }
 
     private void PauseGame()
     {
+        HUD.gameObject.SetActive(false);
         smenu.gameObject.SetActive(true);
         currentState = GameState.Pause;
         audioManager.audiosource.Pause();
@@ -51,6 +60,8 @@ public class GameManager : MonoBehaviour
 
     public void Restart()
     {
+        scoreManager.ResetScore();
+        HUD.gameObject.SetActive(true);
         gameoverMenu.SetActive(false);
         Time.timeScale = 1f;
         SceneManager.LoadScene(1);
@@ -58,7 +69,7 @@ public class GameManager : MonoBehaviour
 
     public void ResumeGame()
     {
-        Debug.Log("resume");
+        HUD.gameObject.SetActive(true);
         smenu.gameObject.SetActive(false);
         gameoverMenu.SetActive(false);
         currentState = GameState.Playing;
@@ -69,13 +80,18 @@ public class GameManager : MonoBehaviour
     public void ReturnToMenu()
     {
         smenu.MainMenu();
-        ResumeGame();
+        smenu.gameObject.SetActive(false);
+        currentState = GameState.Menu;
+        audioManager.audiosource.UnPause();
+        Time.timeScale = 1f;
+        scoreManager.ResetScore();
     }
 
     public void GameOver()
     {
         Time.timeScale = 0f;
-        scoreTxt.text = scoreManager.currentScore.ToString();
+        gameoverScoreTxt.text = scoreManager.currentScore.ToString();
+        HUD.gameObject.SetActive(false);
         gameoverMenu.SetActive(true);
     }
 
@@ -83,7 +99,10 @@ public class GameManager : MonoBehaviour
     {
         audioManager.SwitchAudio(next.buildIndex);
         if (next.buildIndex == 1)
+        { 
             currentState = GameState.Playing;
+            HUD.gameObject.SetActive(true);
+        }
     }
 
     private void Update()
@@ -100,5 +119,4 @@ public class GameManager : MonoBehaviour
             }
         }
     }
-
 }

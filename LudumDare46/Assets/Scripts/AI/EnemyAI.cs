@@ -13,6 +13,7 @@ public class EnemyAI : MonoBehaviour
     public HeroAI hero = null;
     public Character sideKick = null;
     private HealthScript hscript = null;
+    private Renderer renderer = null;
 
     int currentDir = 1;
     int lastDir = 1;
@@ -21,6 +22,7 @@ public class EnemyAI : MonoBehaviour
     {
         rgbdy = GetComponent<Rigidbody>();
         hscript = GetComponent<HealthScript>();
+        renderer = GetComponent<Renderer>();
 
         egc = GetComponentInChildren<EnemyGunController>();
     }
@@ -34,6 +36,9 @@ public class EnemyAI : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        if (!renderer.isVisible)
+            return;
+
         if (collision.gameObject.GetComponent<BulletController>())
         {
             if (hscript.currentHealth > 0)

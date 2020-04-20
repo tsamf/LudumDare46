@@ -4,16 +4,18 @@ using UnityEngine;
 
 public class HealthScript : MonoBehaviour
 {
-    [SerializeField] private int maxHealth = 3;
-    public int currentHealth = 0;
+    [SerializeField] private float maxHealth = 3;
+    public float currentHealth = 0;
+    public HealthBar healthBar = null;
 
     private void Awake()
     {
         currentHealth = maxHealth;
     }
     
-    public void UpdateHealth(int amount)
+    public void UpdateHealth(float amount)
     {
-      currentHealth = Mathf.Clamp(currentHealth + amount, 0 , maxHealth);     
+        currentHealth = Mathf.Clamp(currentHealth + amount, 0 , maxHealth);
+        healthBar.SetHealthBarValue(currentHealth / maxHealth);
     }
 }
