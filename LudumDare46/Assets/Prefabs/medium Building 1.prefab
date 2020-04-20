@@ -103,7 +103,7 @@ GameObject:
   - component: {fileID: 4752788328596197803}
   - component: {fileID: 2296631546761106462}
   - component: {fileID: 1740137731687936012}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: medium Building 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
