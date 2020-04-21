@@ -123,6 +123,14 @@ public class Character : MonoBehaviour
                 Die();
             }
         }
+
+        if(collision.gameObject.GetComponent<SideKickDeath>())
+        {
+            hscript.UpdateHealth(-hscript.maxHealth);
+            Die();
+            GameManager.instance.GameOver();
+
+        }
     }
 
     private void Die()

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4536f844237632b42bee921c3387f266, type: 3}
   m_Name: ShootProfileSideKick
   m_EditorClassIdentifier: 
-  fireRate: 0.2
+  fireRate: 0.1
   noOfBullets: 1
   bulletSpeed: 50
   bulletAliveTime: 4
