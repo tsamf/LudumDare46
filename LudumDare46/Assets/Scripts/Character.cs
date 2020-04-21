@@ -3,7 +3,7 @@
 public class Character : MonoBehaviour
 {
     private Animator anim;
-   
+
     public LayerMask layermask;
     public float movespeed = 12f;
     public float jumpspeed = 12f;
@@ -15,7 +15,7 @@ public class Character : MonoBehaviour
     public bool isGrounded = false;
     public bool jump = false;
 
-    private Vector3 gravity = Vector3.zero; 
+    private Vector3 gravity = Vector3.zero;
     private Vector3 movement = Vector3.zero;
     private Vector3 floorpos = Vector3.zero;
 
@@ -42,7 +42,7 @@ public class Character : MonoBehaviour
     void Update()
     {
         float h = Input.GetAxis("Horizontal");
-        bool fire  = Input.GetMouseButton(0);
+        bool fire = Input.GetMouseButton(0);
         if (fire && !gc.isFiring)
         {
             gc.isFiring = true;
@@ -80,10 +80,10 @@ public class Character : MonoBehaviour
             jumpTimer = jumpDuration;
         }
 
-        if (FloorRayCast(0, 0, raydistance) == Vector3.zero )
+        if (FloorRayCast(0, 0, raydistance) == Vector3.zero)
         {
             isGrounded = false;
-            if(!jump)
+            if (!jump)
                 gravity -= Vector3.up * Physics.gravity.y * Physics.gravity.y * Time.deltaTime;
         }
 
@@ -141,7 +141,7 @@ public class Character : MonoBehaviour
     Vector3 FloorRayCast(float offsetX, float offsetZ, float raycastLength)
     {
         RaycastHit hit;
-        floorpos = transform.TransformPoint(0+offsetX, 0.5f, 0 + offsetZ);
+        floorpos = transform.TransformPoint(0 + offsetX, 0.5f, 0 + offsetZ);
         Debug.DrawRay(floorpos, -Vector3.up * raycastLength, Color.magenta);
         if (Physics.Raycast(floorpos, -Vector3.up, out hit, raycastLength, layermask))
         {

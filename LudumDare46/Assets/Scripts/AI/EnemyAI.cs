@@ -31,7 +31,7 @@ public class EnemyAI : MonoBehaviour
     void Start()
     {
         hero = HeroAI.instance;
-        sideKick = Character.instance;
+      //  sideKick = Character.instance;
     }
 
     private void OnCollisionEnter(Collision collision)
