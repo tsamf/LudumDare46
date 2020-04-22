@@ -152,6 +152,36 @@ Transform:
   m_Father: {fileID: 1542422692821702380}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1308151227966446980
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5664598289353777919}
+  m_Layer: 0
+  m_Name: checkGround
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5664598289353777919
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1308151227966446980}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.05, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6005483825857275011}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1399726946664780330
 GameObject:
   m_ObjectHideFlags: 0
@@ -913,8 +943,7 @@ GameObject:
   - component: {fileID: 5998356020266328760}
   - component: {fileID: 946455899}
   - component: {fileID: 314686924365848138}
-  - component: {fileID: 946455900}
-  - component: {fileID: 2277538573551043580}
+  - component: {fileID: 3651638089889150029}
   m_Layer: 0
   m_Name: sidekickHuman
   m_TagString: Untagged
@@ -935,6 +964,7 @@ Transform:
   m_Children:
   - {fileID: 8068701341539872525}
   - {fileID: 4625158373044674506}
+  - {fileID: 5664598289353777919}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -987,7 +1017,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &946455900
+--- !u!114 &3651638089889150029
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -996,38 +1026,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 7281364435984537232}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2bc7f14a2ffd2e0458a98925fb4502ee, type: 3}
+  m_Script: {fileID: 11500000, guid: e342b086d3900114d9bacfa7e2999b3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ikActive: 1
-  rightHandObj: {fileID: 0}
-  leftHandObj: {fileID: 0}
-  lookObj: {fileID: 0}
-  lookweight: 0
---- !u!114 &2277538573551043580
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7281364435984537232}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 74c598c52db102f40a80da5d26545a49, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  layermask:
-    serializedVersion: 2
-    m_Bits: 0
+  rb: {fileID: 314686924365848138}
   movespeed: 12
-  jumpspeed: 12
-  raydistance: 5
-  jumpDuration: 3
-  rotationVal: 180
-  isGrounded: 0
-  jump: 0
-  rb: {fileID: 0}
-  gc: {fileID: 0}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 256
+  groundCheck: {fileID: 5664598289353777919}
+  jumpHeight: 200
 --- !u!1 &7328081563499302580
 GameObject:
   m_ObjectHideFlags: 0
