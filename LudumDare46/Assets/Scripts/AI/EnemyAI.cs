@@ -11,7 +11,7 @@ public class EnemyAI : MonoBehaviour
     public Rigidbody rgbdy = null;
     public EnemyGunController egc = null;
     public HeroAI hero = null;
-    public Character sideKick = null;
+    public Sidekick sidekick = null;            // replaced Character with Sidekick
     private HealthScript hscript = null;
     private Renderer renderer = null;
 
@@ -31,7 +31,7 @@ public class EnemyAI : MonoBehaviour
     void Start()
     {
         hero = HeroAI.instance;
-      //  sideKick = Character.instance;
+        sidekick = Sidekick.instance;
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -54,15 +54,15 @@ public class EnemyAI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (hscript.currentHealth <= 0 || hero == null || sideKick == null)
+        if (hscript.currentHealth <= 0 || hero == null || sidekick == null)
             return;
 
         float distanceToHero = Vector3.Distance(transform.position, hero.transform.position);
-        float distanceToSideKick = Vector3.Distance(transform.position, sideKick.transform.position);
+        float distanceToSideKick = Vector3.Distance(transform.position, sidekick.transform.position);
 
         if (distanceToSideKick < lookRadius)
         {
-            AimAt(sideKick.transform);
+            AimAt(sidekick.transform);
         }
 
         if (distanceToHero < lookRadius)

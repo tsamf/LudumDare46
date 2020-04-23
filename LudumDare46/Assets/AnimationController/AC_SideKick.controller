@@ -17,9 +17,9 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.040189803
-  m_TransitionOffset: 0.33207247
-  m_ExitTime: 0.32908347
+  m_TransitionDuration: 0.104230486
+  m_TransitionOffset: 0.00082873995
+  m_ExitTime: 0.021600457
   m_HasExitTime: 0
   m_HasFixedDuration: 0
   m_InterruptionSource: 0
@@ -32,17 +32,20 @@ AnimatorStateTransition:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: 
-  m_Conditions: []
+  m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: grounded
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 5926830178960345681}
   m_Solo: 0
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.25
+  m_TransitionDuration: 0.034697913
   m_TransitionOffset: 0
-  m_ExitTime: 0.8125
-  m_HasExitTime: 1
+  m_ExitTime: 0.00000035150197
+  m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
@@ -90,9 +93,9 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.25561625
+  m_TransitionDuration: 0.075532764
   m_TransitionOffset: 0
-  m_ExitTime: 0.17576177
+  m_ExitTime: 0.009085349
   m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
@@ -128,7 +131,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: JumpBlend
-  m_Speed: 5
+  m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -5845459502085722859}
@@ -161,25 +164,25 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: speed
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: vertSpeed
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: grounded
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 1
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -214,26 +217,26 @@ BlendTree:
   m_Name: Blend Tree
   m_Childs:
   - serializedVersion: 2
-    m_Motion: {fileID: 3377601443464112117, guid: 98a10c8d622216b43a0c3e465a27858a, type: 3}
-    m_Threshold: 0
+    m_Motion: {fileID: -5025487861805838091, guid: 98a10c8d622216b43a0c3e465a27858a, type: 3}
+    m_Threshold: 5
     m_Position: {x: 0, y: 0}
-    m_TimeScale: 5
+    m_TimeScale: 7.5
     m_CycleOffset: 0
     m_DirectBlendParameter: movement
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: -5025487861805838091, guid: 98a10c8d622216b43a0c3e465a27858a, type: 3}
-    m_Threshold: 5
+    m_Motion: {fileID: 3377601443464112117, guid: 98a10c8d622216b43a0c3e465a27858a, type: 3}
+    m_Threshold: 10
     m_Position: {x: 0, y: 0}
-    m_TimeScale: 10
-    m_CycleOffset: 0.5
+    m_TimeScale: 7.5
+    m_CycleOffset: 0
     m_DirectBlendParameter: movement
-    m_Mirror: 1
+    m_Mirror: 0
   m_BlendParameter: vertSpeed
   m_BlendParameterY: movement
-  m_MinThreshold: 0
-  m_MaxThreshold: 5
-  m_UseAutomaticThresholds: 0
+  m_MinThreshold: 5
+  m_MaxThreshold: 10
+  m_UseAutomaticThresholds: 1
   m_NormalizedBlendValues: 0
   m_BlendType: 0
 --- !u!1102 &5926830178960345681
@@ -309,9 +312,9 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.10620394
-  m_TransitionOffset: 0.021718133
-  m_ExitTime: 0.3003866
+  m_TransitionDuration: 0.025180288
+  m_TransitionOffset: 0.24693754
+  m_ExitTime: 0.21322463
   m_HasExitTime: 0
   m_HasFixedDuration: 0
   m_InterruptionSource: 0
@@ -325,7 +328,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Armature|Run
-  m_Speed: 1
+  m_Speed: 1.5
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -6548132056479145405}

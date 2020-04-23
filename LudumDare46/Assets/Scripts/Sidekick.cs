@@ -4,25 +4,64 @@ public class Sidekick : MonoBehaviour
 {
     // Animator vars
     private Animator animator;
-    public Rigidbody rb;
+    public Rigidbody rigBody;
     public float movespeed = 2f;
 
-    // jump vars
+    // jump/collision vars
     bool grounded = false;
     Collider[] groundCollisions;
     float groundCheckRadius = 0.2f;
     public LayerMask groundLayer;
     public Transform groundCheck;
-    public float jumpHeight = 35.0f;
-    void Start()
+    public float jumpHeight = 30.0f;
+
+    // combat vars
+    public GunController gunController = null;
+    private HealthScript healthScript = null;
+    public static Sidekick instance = null;
+    int currentDir = 1;
+    int lastDir = 1;
+    public float rotationVal = 180f;
+
+    void Awake ()
     {
-        rb = GetComponent<Rigidbody>();
+        rigBody = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
+        gunController = GetComponentInChildren<GunController>();
+        healthScript = GetComponent<HealthScript>();
+        instance = this;
     }
 
     void Update()
     {
-
+        // shooting
+        bool fire = Input.GetMouseButton(0);
+        if (fire && !gunController.isFiring)
+        {
+            gunController.isFiring = true;
+            StartCoroutine(gunController.Shoot());
+        }
+        // aiming
+        Vector3 gunLookPos = new Vector3(Input.mousePosition.x, Input.mousePosition.y,
+                                            transform.position.z - Camera.main.transform.position.z);
+        gunLookPos = Camera.main.ScreenToWorldPoint(gunLookPos);
+        float dir = gunLookPos.x - transform.position.x;
+        float sign = Mathf.Sign(dir);
+        if (sign > 0)
+        {
+            currentDir = 1;
+        }
+        else
+            currentDir = -1;
+        if (lastDir != currentDir)
+        {
+            lastDir = currentDir;
+            transform.Rotate(Vector3.up, rotationVal);
+            // flip gun so we can always see it won;t hide behind the player
+            Vector3 posx = gunController.transform.localPosition;
+            posx.x = -posx.x;
+            gunController.transform.localPosition = posx;
+        }
     }
 
     void FixedUpdate()
@@ -31,9 +70,8 @@ public class Sidekick : MonoBehaviour
         if (grounded && Input.GetAxis("Jump") > 0)
         {
             grounded = false;
-            animator.SetBool("grounded", grounded);
-            rb.AddForce(new Vector3(0, jumpHeight, 0));
-            Debug.Log(jumpHeight.ToString());
+            animator.SetBool("grounded", grounded);         // set animation variable "grounded" to local variable
+            rigBody.AddForce(new Vector3(0, jumpHeight, 0));     
         }
 
         groundCollisions = Physics.OverlapSphere(groundCheck.position, groundCheckRadius, groundLayer);
@@ -52,8 +90,31 @@ public class Sidekick : MonoBehaviour
         float move = Input.GetAxis("Horizontal");
         animator.SetFloat("speed", Mathf.Abs(move));
 
-        rb.velocity = new Vector3(move * movespeed, rb.velocity.y, 0);
+        rigBody.velocity = new Vector3(move * movespeed, rigBody.velocity.y, 0);
 
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.GetComponent<BulletController>())
+        {
+            if (healthScript.currentHealth > 0)
+                healthScript.UpdateHealth(-1);
+            if (healthScript.currentHealth <= 0)
+            {
+                // game over
+                GameManager.instance.GameOver();
+                Destroy(gameObject);
+            }
+        }
+
+        if (collision.gameObject.GetComponent<SideKickDeath>())
+        {
+            healthScript.UpdateHealth(-healthScript.maxHealth);
+            Destroy(gameObject);
+            GameManager.instance.GameOver();
+
+        }
     }
 
 }

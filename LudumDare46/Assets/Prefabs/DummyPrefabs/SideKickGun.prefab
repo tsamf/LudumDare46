@@ -113,7 +113,6 @@ MonoBehaviour:
   shootProfile: {fileID: 11400000, guid: 1d1c87dc3ac0f474ba92d898d072b6e1, type: 2}
   nozzle: {fileID: 2568110583191977580}
   isFiring: 0
-  lookAt: {x: 0, y: 0, z: 0}
 --- !u!1 &4413250108982989768
 GameObject:
   m_ObjectHideFlags: 0
@@ -172,7 +171,7 @@ Transform:
   m_GameObject: {fileID: 7245605605317817066}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 2.77}
-  m_LocalScale: {x: 1, y: 1, z: 6.19}
+  m_LocalScale: {x: 1, y: 1, z: 6.18}
   m_Children: []
   m_Father: {fileID: 1455495640161692101}
   m_RootOrder: 1
