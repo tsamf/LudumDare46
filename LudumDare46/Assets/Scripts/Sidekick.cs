@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Diagnostics;
+using UnityEngine;
+using Debug = UnityEngine.Debug;
 
 public class Sidekick : MonoBehaviour
 {
@@ -14,6 +16,7 @@ public class Sidekick : MonoBehaviour
     public LayerMask groundLayer;
     public Transform groundCheck;
     public float jumpHeight = 30.0f;
+    public AudioSource jump;
 
     // combat vars
     public GunController gunController = null;
@@ -71,6 +74,8 @@ public class Sidekick : MonoBehaviour
         {
             grounded = false;
             animator.SetBool("grounded", grounded);         // set animation variable "grounded" to local variable
+            jump.Play(0);                                   //Play jump sound
+            Debug.Log("Jump");
             rigBody.AddForce(new Vector3(0, jumpHeight, 0));     
         }
 
