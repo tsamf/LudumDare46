@@ -79,19 +79,6 @@ public class Sidekick : MonoBehaviour
             rigBody.AddForce(new Vector3(0, jumpHeight, 0));     
         }
 
-        groundCollisions = Physics.OverlapSphere(groundCheck.position, groundCheckRadius, groundLayer);
-
-        if (groundCollisions.Length > 0)
-        {
-            grounded = true;
-        }
-        else
-        {
-            grounded = false;
-        }
-
-        animator.SetBool("grounded", grounded);
-
         float move = Input.GetAxis("Horizontal");
         animator.SetFloat("speed", Mathf.Abs(move));
 
@@ -113,13 +100,18 @@ public class Sidekick : MonoBehaviour
             }
         }
 
-        if (collision.gameObject.GetComponent<SideKickDeath>())
+        else if (collision.gameObject.GetComponent<SideKickDeath>())
         {
             healthScript.UpdateHealth(-healthScript.maxHealth);
             Destroy(gameObject);
             GameManager.instance.GameOver();
 
         }
-    }
 
+        else if (collision.gameObject.layer == 8)
+        {
+            grounded = true;
+            animator.SetBool("grounded", grounded);
+        }
+    }
 }

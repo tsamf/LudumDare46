@@ -14,6 +14,7 @@ public class EnemyAI : MonoBehaviour
     public Sidekick sidekick = null;            // replaced Character with Sidekick
     private HealthScript hscript = null;
     private Renderer renderer = null;
+    public AudioSource hurt;
 
     int currentDir = 1;
     int lastDir = 1;
@@ -23,7 +24,7 @@ public class EnemyAI : MonoBehaviour
         rgbdy = GetComponent<Rigidbody>();
         hscript = GetComponent<HealthScript>();
         renderer = GetComponent<Renderer>();
-
+       
         egc = GetComponentInChildren<EnemyGunController>();
     }
 
@@ -41,11 +42,14 @@ public class EnemyAI : MonoBehaviour
 
         if (collision.gameObject.GetComponent<BulletController>())
         {
+            
             if (hscript.currentHealth > 0)
+                hurt.Play();
                 hscript.UpdateHealth(-1);
             if (hscript.currentHealth <= 0)
             {
                 ScoreManager.instance.UpdateScore(1);
+                hurt.Play();
                 Die();
             }
         }

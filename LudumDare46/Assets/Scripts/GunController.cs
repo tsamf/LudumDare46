@@ -6,6 +6,7 @@ public class GunController : MonoBehaviour
 {
     public ShootProfile shootProfile = null;
     public Transform nozzle = null;
+    public AudioSource shoot;
     public bool isFiring = false;
 
     public IEnumerator Shoot()
@@ -15,6 +16,7 @@ public class GunController : MonoBehaviour
             GameObject bullet = Instantiate(shootProfile.bulletPrefab, nozzle.position, Quaternion.identity);
             bullet.GetComponent<Rigidbody>().AddForce(nozzle.forward * shootProfile.bulletSpeed, ForceMode.Impulse);
             bullet.GetComponent<BulletController>().aliveTime = shootProfile.bulletAliveTime;
+            shoot.Play(0);
             yield return new WaitForSeconds(shootProfile.fireRate);
         }
 
